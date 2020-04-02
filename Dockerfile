@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM nvcr.io/nvidia/tensorflow:20.03-tf1-py3
 
 ENV DEBIAN_FRONTEND noninteractive
 
