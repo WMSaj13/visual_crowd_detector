@@ -6,15 +6,16 @@ build:
 
 dev:
 	docker run --rm -ti  \
-		--runtime=nvidia \
+		--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 --gpus all \
 		-v $(PWD)/:/project \
 		-w '/project' \
 		$(IMAGE_NAME)
 
 dev_gui:
+	xhost local:root
 	docker run --rm -ti \
 		-v $$PWD/:/project \
-		--runtime="nvidia" \
+		--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 --gpus all \
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
@@ -23,7 +24,7 @@ dev_gui:
 
 lab:
 	docker run --rm -ti  \
-		--runtime=nvidia \
+		--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 --gpus all \
 		-p $(PORT):$(PORT) \
 		-v $(PWD)/:/project \
 		-w '/project' \
